@@ -1,0 +1,39 @@
+<core:View
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="com.gregorbrett.soundcloui5d.view.Main"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="SoundcloUI5d">
+		<content>
+			<PullToRefresh id="pullToRefresh" refresh="loadRecentTracks" />
+			<IconTabBar upperCase="true" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter text="Tracks">
+						<List id="trackList" items="{/tracks}" >
+							<ObjectListItem title="{title}" type="Active" icon="{artwork_url}" press="selectTrack"/>
+								<swipeContent>
+                                    <Button text="Add to Favorites" type="Accept" press="handleFavorite" />
+                                </swipeContent>
+						</List>
+					</IconTabFilter>
+					<IconTabFilter text="Favorites">
+						<List id="favsList" items="{favs>/tracks}" >
+							<ObjectListItem title="{favs>title}" type="Active" icon="{favs>artwork_url}" press="selectTrack"/>
+								<swipeContent>
+                                    <Button text="Remove from Favorites" type="Reject" press="handleFavoriteRemove" />
+                                </swipeContent>
+						</List>
+					</IconTabFilter>
+					
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<Toolbar>
+				<Label id="trackName"/>
+				<ToolbarSpacer/>
+				<Button icon="sap-icon://pause" press="pause"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>
